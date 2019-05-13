@@ -11,5 +11,8 @@
     "native-node"
   ],
   "author": "Andrew Murray",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
