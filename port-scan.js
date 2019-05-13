@@ -20,26 +20,26 @@ while (start <= end) {
   // the reason we encapsulate the socket creation process is because we want to preserve the value of `port` for the callbacks
   ;(function(port) {
     // console.log('CHECK: ' + port);
-    const s = new net.Socket()
+    const socket = new net.Socket()
 
-    s.setTimeout(timeout, function() {
-      s.destroy()
+    socket.setTimeout(timeout, function() {
+      socket.destroy()
     })
-    s.connect(port, host, function() {
+    socket.connect(port, host, function() {
       console.log('OPEN: ' + port)
       // we don't destroy the socket cos we want to listen to data event
       // the socket will self-destruct in 2 secs cos of the timeout we set, so no worries
     })
 
     // if any data is written to the client on connection, show it
-    s.on('data', function(data) {
+    socket.on('data', function(data) {
       console.log(port + ': ' + data)
-      s.destroy()
+      socket.destroy()
     })
 
-    s.on('error', function(e) {
+    socket.on('error', function(error) {
       // silently catch all errors - assume the port is closed
-      s.destroy()
+      socket.destroy()
     })
   })(port)
 
