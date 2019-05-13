@@ -1,10 +1,13 @@
 'use strict'
 
-var os = require('os')
-var ifaces = os.networkInterfaces()
+//require the node module for operating system
+const os = require('os')
+
+//set the ifaces to the the os interfaces getters output
+const ifaces = os.networkInterfaces()
 
 Object.keys(ifaces).forEach(function(ifname) {
-  var alias = 0
+  let alias = 0
 
   ifaces[ifname].forEach(function(iface) {
     if ('IPv4' !== iface.family || iface.internal !== false) {
