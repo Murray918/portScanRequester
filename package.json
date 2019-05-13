@@ -1,0 +1,15 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "this is a demo of what node is",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "node",
+    "native-node"
+  ],
+  "author": "Andrew Murray",
+  "license": "MIT"
+}
