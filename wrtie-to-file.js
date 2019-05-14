@@ -21,29 +21,33 @@ const createNewFileAndWriteToIt = async (path, data) => {
 //3. append the data to the end of the file on a new line
 const appendDataToExistingFile = async (path, data) => {
   try {
-    fs.appendFileSync(path, data)
+    return await fs.appendFileSync(path, data)
   } catch (error) {
     return error
   }
 }
 
 const writeToAFile = async (path, data) => {
-  let exists = await checkIfFileExists(path)
-  let result
-  if (exists === true) {
-    data = `\n${data}`
-    result = await appendDataToExistingFile(path, data)
-  } else {
-    result = await createNewFileAndWriteToIt(path, data)
+  try {
+    let exists = await checkIfFileExists(path)
+    let result = 'write successful'
+    if (exists === true) {
+      data = `\n${data}`
+      await appendDataToExistingFile(path, data)
+    } else {
+      await createNewFileAndWriteToIt(path, data)
+    }
+    console.table({
+      path,
+      data,
+      exists,
+      result
+    })
+  } catch (error) {
+    console.error(error)
   }
-  console.table({
-    path,
-    data,
-    exists,
-    result
-  })
-  return result
 }
 
+// writeToAFile('./party.txt', 'hello party')
 //use the file system module to write to a file
 module.exports = writeToAFile

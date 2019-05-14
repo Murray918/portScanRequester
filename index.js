@@ -4,21 +4,22 @@ const writeFile = require('./wrtie-to-file')
 const scanPorts = require('./port-scan')
 
 const timeout = 2000
-const end = 10000
-const start = 1
+const end = 3235
+const start = 3234
 const host = 'localhost'
 const PORT = 8080
 
-let app = express()
-//test writing to a file will end up writing a test for this later
-// writeFile('./tmp/test.txt', 'woot woot woot party!!!!!!!!')
-scanPorts(host, start, end, timeout)
+console.log(scanPorts(host, start, end, timeout))
 
-app.get('/', (request, response) => {
-  let host = request.hostname
-  writeFile('./tmp/port-log.txt', request.hostname)
-  response.send(host)
-})
+let app = express()
+// app.get('/', (request, response) => {
+//   let host = request.hostname
+//   console.log('localhost hit', scanPorts(host, start, end, timeout))
+//   //   .forEach(item => {
+//   //     writeFile('./tmp/port-log.txt', item.toString())
+//   //   })
+//   response.send(host)
+// })
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`)
