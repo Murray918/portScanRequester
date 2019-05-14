@@ -1,51 +1,39 @@
 const net = require('net')
 
-const scanPorts = (host, start, end, timeout) => {
+const scanPort = function(port, item, host) {
+  let socket = new net.Socket()
   console.log('line 5')
-  let portResults = []
-  // the port scanning loop should run an iife
-  while (start <= end) {
-    // it is always good to give meaningful names to your variables
-    // since the context is changing, we use `port` to refer to current port to scan
-    let port = start
+  socket.setTimeout(2000, function() {
+    socket.destroy()
+  })
 
-    // we create an anonynous function, pass the current port, and operate on it
-    // the reason we encapsulate the socket creation process is because we want to preseve the value of `port` for the callbacks
-    ;(function(port) {
-      // console.log('CHECK: ' + port);
-      let socket = new net.Socket()
+  socket.connect(port, 'localhost', function() {
+    console.log('OPEN: ' + port)
+    console.log('on connection', tempArr)
+    item = `OPEN : ${port}`
+  })
 
-      //destroy all
-      socket.setTimeout(timeout, function() {
-        socket.destroy()
-      })
+  socket.on('data', function(data) {
+    item = `INFO : ${port} : ${data}`
+    console.log(port + ': ' + data)
+    console.log(portResults)
+    socket.destroy()
+  })
 
-      socket.connect(port, host, function() {
-        portResults.push(`OPEN : ${port}`)
-        console.log('OPEN: ' + port)
-        console.log('on connection', portResults)
-        // we don't destroy the socket cos we want to listen to data event
-        // the socket will self-destruct in 2 secs cos of the timeout we set, so no worries
-      })
+  socket.on('error', function(error) {
+    socket.destroy()
+  })
+  console.log(item)
+  return item
+}
 
-      // if any data is written to the client on connection, show it
-      socket.on('data', function(data) {
-        portResults.push(`INFO : ${port} : ${data}`)
-        console.log(port + ': ' + data)
-        console.log(portResults)
-        socket.destroy()
-      })
-
-      socket.on('error', function(error) {
-        // silently catch all errors - assume the port is closed
-        socket.destroy()
-      })
-      // console.log(postResults)
-    })(port)
-    // console.log('line 44 : ', postResults)
-    start++
-  }
-  // console.log('line 47 : ', postResults)
+const scanPorts = (host, start, end, timeout) => {
+  let range = start + end
+  const portResults = Array(range).map((item, index) => {
+    console.log('ksj;lkjfd', item)
+    return scanPort(index, item)
+  })
   return portResults
 }
+
 module.exports = scanPorts
