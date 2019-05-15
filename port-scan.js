@@ -1,39 +1,37 @@
 const net = require('net')
 
-const scanPort = function(port, item, host) {
+const scanPort = function(host, port) {
   let socket = new net.Socket()
-  console.log('line 5')
+  let item
+
   socket.setTimeout(2000, function() {
     socket.destroy()
   })
 
-  socket.connect(port, 'localhost', function() {
+  socket.connect(port, host, function() {
     console.log('OPEN: ' + port)
-    console.log('on connection', tempArr)
-    item = `OPEN : ${port}`
+    console.log('on connection', port)
   })
 
   socket.on('data', function(data) {
     item = `INFO : ${port} : ${data}`
     console.log(port + ': ' + data)
-    console.log(portResults)
     socket.destroy()
   })
 
   socket.on('error', function(error) {
     socket.destroy()
   })
-  console.log(item)
   return item
 }
 
-const scanPorts = (host, start, end, timeout) => {
-  let range = start + end
-  const portResults = Array(range).map((item, index) => {
-    console.log('ksj;lkjfd', item)
-    return scanPort(index, item)
-  })
+const portScan = (host, start, end, timeout) => {
+  let portResults = []
+  while (start <= end) {
+    portResults.push(scanPort(start, host))
+    start++
+  }
   return portResults
 }
 
-module.exports = scanPorts
+module.exports = { portScan }
