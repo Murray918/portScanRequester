@@ -4,12 +4,12 @@ const writeFile = require('./wrtie-to-file')
 const scanPorts = require('./port-scan')
 
 const timeout = 2000
-const end = 3235
-const start = 3234
+const end = 10000
+const start = 1
 const host = 'localhost'
 const PORT = 8080
 
-console.log(scanPorts(host, start, end, timeout))
+scanPorts(host, start, end, timeout)
 
 let app = express()
 // app.get('/', (request, response) => {
