@@ -11,7 +11,7 @@ const host = 'localhost'
 const PORT = 8080
 // console.log('app js line 13', await scanPorts(host, start, end, timeout))
 
-console.log(portScan(host, start, end, timeout))
+console.log('portScan Results : ', portScan(host, start, end, timeout))
 // console.log('line 17', scannedPorts)
 
 let app = express()
