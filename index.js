@@ -1,7 +1,6 @@
 const express = require('express')
 
 //our modules that we have defined
-const writeFile = require('./wrtie-to-file')
 const { portScan } = require('./port-scan')
 
 const timeout = 2000
