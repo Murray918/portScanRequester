@@ -1,7 +1,7 @@
 const net = require('net')
 const writeFile = require('./write-to-file')
 
-// this is the meat and potatoes of this project. Here we create a IIFE( ) to create a socket an try to connect to each port from start to end. this function takes a host, start, end, and timeout. @param: host => this is target hostname or ip number. @param: start => the beginning of the port range. @param: end => this is the end of the port range. @param : timeout => this tells the how long to wait for a response before it destroys itself.
+// this is the meat and potatoes of this project. Here we create a IIFE(--> Immediately Invoked Function Expression) to create a socket an try to connect to each port from start to end. this function takes a host, start, end, and timeout. @param: host => this is target hostname or ip number. @param: start => the beginning of the port range. @param: end => this is the end of the port range. @param : timeout => this tells the how long to wait for a response before it destroys itself.
 
 const scanPort = async (host, port, timeout) => {
   // we need to wrap this port scanning function in an IIFE syntax so that that we can encapsulates the initiation of the Socket. This keeps us from polluting the global scope and the stack with all of the event emitters that we are creating in the loop. This keeps our callbacks from getting lost in the mix because we fire this function ...like 100000 times.
@@ -40,7 +40,7 @@ const scanPort = async (host, port, timeout) => {
 }
 
 const portScan = (host, start, end, timeout) => {
-  //currently we are using a while loop to fire this function off 10000 times this is somewhat clean for now but we might neeed to clean this up later
+  //currently we are using a while loop to fire this function off 10000 times this is somewhat clean for now but we might need to clean this up later
   while (start <= end) {
     port = start
     scanPort(host, port, timeout)
