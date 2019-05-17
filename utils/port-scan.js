@@ -1,5 +1,5 @@
 const net = require('net')
-const writeFile = require('./write-to-file')
+const writeFile = require('./write-file')
 // ==> ==> //!==|> Port Scan Explained <|!==\\ <== <== \\
 // this is the meat and potatoes of this project. Here we create a IIFE(Immediately Invoked Function Expression) to create a socket an try to connect to each port from start to end. this function takes a host, start, end, and timeout. @param: host => this is target hostname or ip number. @param: start => the beginning of the port range. @param: end => this is the end of the port range. @param : timeout => this tells the how long to wait for a response before it destroys itself.
 
@@ -51,4 +51,4 @@ const portScan = (host, start, end, timeout) => {
   return 'success'
 }
 
-module.exports = { portScan }
+module.exports = portScan

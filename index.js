@@ -1,6 +1,5 @@
 const express = require('express')
 //our modules that we have defined
-const { portScan } = require('./utils/port-scan')
 const homeRoutes = require('./index/routes')
 
 //set up our port

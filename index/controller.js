@@ -1,4 +1,4 @@
-const { portScan } = require('../port-scan-config')
+const portScan = require('../utils/port-scan')
 const { portScanConfig } = require('../port-scan-config')
 
 const logPorts = (request, response) => {
