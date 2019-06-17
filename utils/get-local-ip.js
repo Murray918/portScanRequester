@@ -6,7 +6,7 @@ const os = require('os')
 //set the ifaces to the the os interfaces getters output
 const ifaces = os.networkInterfaces()
 // console.log(ifaces)
-
+console.log(ifaces)
 Object.keys(ifaces).forEach(function(ifname) {
   let alias = 0
 
